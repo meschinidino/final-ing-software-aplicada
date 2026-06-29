@@ -2,6 +2,8 @@
 
 Aplicacion TodoList desarrollada como trabajo final de **Ingenieria de Software Aplicada**.
 
+**Alumno:** Dino Meschini
+
 El producto es simple a proposito: permite autenticar usuarios, administrar listas de tareas, crear tareas y organizarlas con etiquetas. El foco principal no esta en la cantidad de funcionalidades, sino en demostrar un flujo completo de desarrollo de software: modelado, API, persistencia, pruebas, contenedores, observabilidad, PWA y entrega continua.
 
 ## Objetivo
@@ -84,10 +86,3 @@ La definicion del alcance y las decisiones tecnicas viven en `specs/`:
 - `specs/tech-stack.md`
 
 Esos archivos son la fuente de verdad para el orden de implementacion y los criterios de evaluacion.
-
-## Notas de desarrollo
-
-- Mantener el alcance simple y alineado con los requisitos de la materia.
-- Preferir implementaciones claras y verificables antes que abstracciones innecesarias.
-- No commitear secretos, caches, dependencias instaladas ni artefactos generados.
-- `trabajo-final-specs.md` es material local de referencia y no debe subirse al repositorio.
