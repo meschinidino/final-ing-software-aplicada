@@ -25,6 +25,7 @@ type API struct {
 func NewRouter(db *gorm.DB, authService auth.Service) *gin.Engine {
 	api := API{db: db, auth: authService}
 	router := gin.Default()
+	router.Use(corsMiddleware())
 
 	router.GET("/health", api.health)
 
@@ -52,6 +53,23 @@ func NewRouter(db *gorm.DB, authService auth.Service) *gin.Engine {
 	protected.DELETE("/tags/:id", api.deleteTag)
 
 	return router
+}
+
+func corsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		origin := c.GetHeader("Origin")
+		if origin == "http://localhost:5173" || origin == "http://127.0.0.1:5173" {
+			c.Header("Access-Control-Allow-Origin", origin)
+			c.Header("Vary", "Origin")
+			c.Header("Access-Control-Allow-Headers", "Authorization, Content-Type")
+			c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		}
+		if c.Request.Method == http.MethodOptions {
+			c.AbortWithStatus(http.StatusNoContent)
+			return
+		}
+		c.Next()
+	}
 }
 
 func (api API) health(c *gin.Context) {

@@ -75,6 +75,8 @@ Exit criteria:
 
 ## Milestone 4: Web App and E2E Coverage
 
+Status: Completed on 2026-06-29 by `specs/2026-06-29-web-app-e2e`.
+
 Build the minimal React web app and prove it through Playwright.
 
 Deliverables:
