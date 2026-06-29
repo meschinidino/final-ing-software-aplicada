@@ -2,6 +2,8 @@
 
 ## Milestone 1: Project Skeleton and Domain
 
+Status: Completed on 2026-06-29 by `specs/2026-06-29-project-skeleton-domain`.
+
 Establish the repository structure and the core TodoList domain.
 
 Deliverables:

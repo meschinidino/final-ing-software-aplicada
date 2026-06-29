@@ -1,0 +1,37 @@
+# Local assignment/reference files
+trabajo-final-specs.md
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs and temporary files
+*.log
+tmp/
+temp/
+
+# Go
+.gocache/
+bin/
+coverage.out
+
+# Node/Vite/Playwright
+node_modules/
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+
+# Docker/local runtime data
+*.pid
+*.sock

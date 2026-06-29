@@ -1,0 +1,24 @@
+services:
+  api:
+    image: todolist-api:local
+    profiles: ["future"]
+
+  db:
+    image: postgres:16
+    profiles: ["future"]
+
+  web:
+    image: todolist-web:local
+    profiles: ["future"]
+
+  loki:
+    image: grafana/loki:latest
+    profiles: ["future"]
+
+  alloy:
+    image: grafana/alloy:latest
+    profiles: ["future"]
+
+  grafana:
+    image: grafana/grafana:latest
+    profiles: ["future"]
