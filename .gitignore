@@ -18,6 +18,7 @@ Thumbs.db
 *.log
 tmp/
 temp/
+.gstack/
 
 # Go
 .gocache/
