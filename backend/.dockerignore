@@ -1,0 +1,6 @@
+.gocache
+.api-dev-bin
+.api-dev.log
+.api-dev.pid
+bin
+tmp

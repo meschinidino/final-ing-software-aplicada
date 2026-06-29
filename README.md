@@ -129,6 +129,42 @@ Variables relevantes:
 - `APP_ENV`: usar `development` solo para ejecucion local; habilita un secreto JWT local por defecto.
 - `JWT_TTL_MINUTES`: duracion del token, por defecto `60`.
 
+Levantar el runtime completo con Docker Compose:
+
+```sh
+make runtime-up
+```
+
+Este comando usa el proyecto Compose `todolist-runtime`, construye las imagenes locales `todolist-api:local` y `todolist-web:local`, aplica las migraciones sobre la base runtime si todavia no existen, y levanta:
+
+- API: `http://localhost:8080`
+- Web: `http://localhost:5173`
+- Grafana: `http://localhost:3000` (`admin` / `admin`)
+- Loki: `http://localhost:3100`
+- PostgreSQL runtime: `localhost:54340`
+
+Inspeccionar el estado del runtime:
+
+```sh
+make runtime-status
+```
+
+Detener el runtime sin borrar los volumenes persistentes:
+
+```sh
+make runtime-down
+```
+
+El volumen de datos principal del runtime es `todolist-runtime_todolist_runtime_db`. La base de validacion usa otro proyecto, puerto y volumen: `todolist-validation`, `localhost:54339` y `todolist-validation_todolist_validation_db`. Por eso `make db-reset` reinicia solo la base de validacion y no borra datos del runtime.
+
+Para crear un usuario de prueba en el runtime antes de iniciar sesion desde la web:
+
+```sh
+curl -H 'Content-Type: application/json' \
+  -d '{"email":"demo@example.test","password":"TestPassword123!"}' \
+  http://localhost:8080/api/register
+```
+
 Endpoints principales del backend:
 
 - `GET /health`

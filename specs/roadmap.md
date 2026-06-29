@@ -97,6 +97,8 @@ Exit criteria:
 
 ## Milestone 5: Dockerized Runtime
 
+Status: Completed on 2026-06-29 by `specs/2026-06-29-dockerized-runtime`.
+
 Containerize the application and make the full local stack reproducible.
 
 Deliverables:

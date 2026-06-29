@@ -1,4 +1,5 @@
-COMPOSE := docker compose -p todolist-validation -f deploy/docker-compose.yml --profile validation
+VALIDATION_COMPOSE := docker compose -p todolist-validation -f deploy/docker-compose.yml --profile validation
+RUNTIME_COMPOSE := docker compose -p todolist-runtime -f deploy/docker-compose.yml
 DATABASE_URL ?= postgres://postgres:postgres@localhost:54339/todolist_validation?sslmode=disable
 JWT_SECRET ?= local-validation-secret
 APP_ENV ?= development
@@ -9,23 +10,35 @@ API_PID_FILE := .api-dev.pid
 API_LOG_FILE := .api-dev.log
 API_BIN := .api-dev-bin
 
-.PHONY: backend-test db-up db-down db-reset migrate-up api-dev api-up api-down api-status validation-down
+.PHONY: backend-test db-up db-down db-reset migrate-up api-dev api-up api-down api-status validation-down runtime-up runtime-down runtime-status runtime-build
 
 backend-test:
 	cd backend && GOCACHE=$(GOCACHE) go test ./...
 
 db-up:
-	$(COMPOSE) up -d --wait db
+	$(VALIDATION_COMPOSE) up -d --wait validation-db
 
 db-down:
-	$(COMPOSE) down --remove-orphans
+	$(VALIDATION_COMPOSE) down --remove-orphans
 
 db-reset:
-	$(COMPOSE) down --volumes --remove-orphans
-	$(COMPOSE) up -d --wait db
+	$(VALIDATION_COMPOSE) down --volumes --remove-orphans
+	$(VALIDATION_COMPOSE) up -d --wait validation-db
 
 migrate-up:
-	$(COMPOSE) exec -T db sh -c 'for migration in /migrations/*.up.sql; do psql -v ON_ERROR_STOP=1 -U postgres -d todolist_validation -f "$$migration"; done'
+	$(VALIDATION_COMPOSE) exec -T validation-db sh -c 'for migration in /migrations/*.up.sql; do psql -v ON_ERROR_STOP=1 -U postgres -d todolist_validation -f "$$migration"; done'
+
+runtime-build:
+	$(RUNTIME_COMPOSE) build api web
+
+runtime-up:
+	$(RUNTIME_COMPOSE) up -d --build --wait
+
+runtime-status:
+	$(RUNTIME_COMPOSE) ps
+
+runtime-down:
+	$(RUNTIME_COMPOSE) down --remove-orphans
 
 api-dev:
 	cd backend && DATABASE_URL='$(DATABASE_URL)' JWT_SECRET='$(JWT_SECRET)' APP_ENV='$(APP_ENV)' API_ADDR='$(API_ADDR)' go run ./cmd/api
