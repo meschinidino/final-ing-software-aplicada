@@ -77,6 +77,36 @@ cd backend
 GOCACHE=../.gocache go test ./...
 ```
 
+Ejecutar la API backend contra una base PostgreSQL con las migraciones aplicadas:
+
+```sh
+cd backend
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/todolist?sslmode=disable \
+APP_ENV=development \
+go run ./cmd/api
+```
+
+Variables relevantes:
+
+- `API_ADDR`: direccion de escucha, por defecto `:8080`.
+- `DATABASE_URL`: conexion PostgreSQL.
+- `JWT_SECRET`: secreto para firmar JWT. Es obligatorio salvo cuando `APP_ENV=development`.
+- `APP_ENV`: usar `development` solo para ejecucion local; habilita un secreto JWT local por defecto.
+- `JWT_TTL_MINUTES`: duracion del token, por defecto `60`.
+
+Endpoints principales del backend:
+
+- `GET /health`
+- `POST /api/register`
+- `POST /api/authenticate`
+- `GET|POST /api/todo-lists`
+- `GET|PUT|DELETE /api/todo-lists/:id`
+- `GET|POST /api/tasks`
+- `GET|PUT|DELETE /api/tasks/:id`
+- `PUT /api/tasks/:id/tags`
+- `GET|POST /api/tags`
+- `GET|PUT|DELETE /api/tags/:id`
+
 ## Documentacion del proyecto
 
 La definicion del alcance y las decisiones tecnicas viven en `specs/`:
