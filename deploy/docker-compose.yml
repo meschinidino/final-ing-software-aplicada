@@ -5,7 +5,21 @@ services:
 
   db:
     image: postgres:16
-    profiles: ["future"]
+    profiles: ["validation", "future"]
+    environment:
+      POSTGRES_DB: todolist_validation
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "54339:5432"
+    volumes:
+      - todolist_validation_db:/var/lib/postgresql/data
+      - ../backend/migrations:/migrations:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d todolist_validation"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   web:
     image: todolist-web:local
@@ -22,3 +36,6 @@ services:
   grafana:
     image: grafana/grafana:latest
     profiles: ["future"]
+
+volumes:
+  todolist_validation_db:

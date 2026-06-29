@@ -32,6 +32,8 @@ Exit criteria:
 
 ## Milestone 2: Backend API and Authentication
 
+Status: Completed on 2026-06-29 by `specs/2026-06-29-backend-api-auth` and validated by `specs/2026-06-29-backend-runtime-validation`.
+
 Implement the REST API required for the project.
 
 Deliverables:
@@ -55,6 +57,8 @@ Exit criteria:
 - CRUD behavior can be verified with HTTP requests.
 
 ## Milestone 3: Backend Unit Tests
+
+Status: Completed on 2026-06-29 by `specs/2026-06-29-backend-runtime-validation`.
 
 Add focused backend test coverage.
 

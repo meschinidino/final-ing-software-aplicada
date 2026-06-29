@@ -1,6 +1,6 @@
 # Backend API and Authentication Validation
 
-Status: Partially passed on 2026-06-29.
+Status: Passed on 2026-06-29.
 
 Technical compilation and focused auth unit tests passed with:
 
@@ -8,9 +8,45 @@ Technical compilation and focused auth unit tests passed with:
 GOCACHE=/Users/dinomeschini/Documents/final_ing_soft_aplicada/.gocache go test ./...
 ```
 
-The auth checks cover email canonicalization and expired-token rejection.
+Backend verification also passed through the root Makefile:
 
-Runtime PostgreSQL/HTTP smoke validation is still pending. The agent environment did not have `psql` or `migrate` installed, and Docker was not running, so a temporary PostgreSQL container could not be started.
+```sh
+make backend-test
+```
+
+The checks cover email canonicalization, expired-token rejection, health routing, and missing-bearer-token rejection.
+
+The DB-only Compose validation configuration renders successfully with:
+
+```sh
+docker compose -p todolist-validation -f deploy/docker-compose.yml --profile validation config
+```
+
+Runtime PostgreSQL/HTTP smoke validation passed after starting Colima and using the DB-only validation Compose project.
+
+The validation database was published on `localhost:54339` because `54329` was already occupied by an unrelated `hrapp-db-1` container.
+
+Passed runtime commands:
+
+```sh
+make db-reset
+make migrate-up
+GOCACHE=/Users/dinomeschini/Documents/final_ing_soft_aplicada/.gocache make api-dev
+make db-down
+```
+
+Follow-up lifecycle fix:
+
+```sh
+make api-up
+make api-status
+make api-down
+make validation-down
+```
+
+Future validation runs should use `make api-up`, `make api-down`, and `make validation-down` so the Makefile owns API process startup and cleanup.
+
+The HTTP smoke flow passed for health, registration, authentication, missing-token rejection, invalid-token rejection, todo list CRUD, task CRUD, tag CRUD, task-tag assignment, and cross-user ownership rejection.
 
 ## Manual Validation
 
@@ -43,15 +79,14 @@ go test ./...
 If a local PostgreSQL database is available, run migrations before API smoke testing:
 
 ```sh
-migrate -path migrations -database "$DATABASE_URL" up
+make db-up
+make migrate-up
 ```
 
 Then run the API with environment variables similar to:
 
 ```sh
-DATABASE_URL=postgres://postgres:postgres@localhost:5432/todolist?sslmode=disable \
-JWT_SECRET=local-development-secret \
-go run ./cmd/api
+make api-up
 ```
 
 ## Expected Unit and E2E Tests

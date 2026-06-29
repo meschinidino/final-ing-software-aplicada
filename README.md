@@ -63,7 +63,13 @@ specs/     Definicion del producto, roadmap y decisiones tecnicas
 
 ## Comandos utiles
 
-Verificar que el backend compile:
+Verificar el backend:
+
+```sh
+make backend-test
+```
+
+El comando ejecuta las pruebas Go del backend con un cache local del repositorio. Tambien se puede ejecutar manualmente:
 
 ```sh
 cd backend
@@ -77,13 +83,42 @@ cd backend
 GOCACHE=../.gocache go test ./...
 ```
 
+Levantar una base PostgreSQL 16 limpia para validar el backend:
+
+```sh
+make db-reset
+make migrate-up
+```
+
+La base queda publicada en `localhost:54339` con la URL:
+
+```text
+postgres://postgres:postgres@localhost:54339/todolist_validation?sslmode=disable
+```
+
 Ejecutar la API backend contra una base PostgreSQL con las migraciones aplicadas:
 
 ```sh
-cd backend
-DATABASE_URL=postgres://postgres:postgres@localhost:5432/todolist?sslmode=disable \
-APP_ENV=development \
-go run ./cmd/api
+make api-up
+make api-status
+```
+
+Detener la API, detener la base de validacion y remover servicios huerfanos:
+
+```sh
+make validation-down
+```
+
+Para levantar la base sin borrar datos existentes:
+
+```sh
+make db-up
+```
+
+Para ejecutar la API en primer plano durante desarrollo:
+
+```sh
+make api-dev
 ```
 
 Variables relevantes:
