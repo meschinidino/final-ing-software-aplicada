@@ -24,6 +24,15 @@ Este repositorio busca mostrar una aplicacion completa y verificable. Una person
 - Logs centralizados con Loki, Grafana Alloy y Grafana.
 - Pipeline de CI/CD con GitHub Actions y publicacion de imagen Docker.
 
+## Evaluacion final
+
+La guia compacta para revisar todos los requisitos esta en:
+
+- [Checklist final de evaluacion](docs/evaluation/final-checklist.md)
+- [Evidencia de evaluacion](docs/evaluation/evidence.md)
+
+El checklist mapea cada requisito con archivos y comandos. El archivo de evidencia separa checks locales, verificaciones manuales de UI/observabilidad/PWA y checks remotos pendientes de GitHub Actions y GitHub Container Registry.
+
 ## Stack tecnologico
 
 - **Backend:** Go, Gin, GORM, golang-migrate, golang-jwt.

@@ -185,6 +185,8 @@ Exit criteria:
 
 ## Milestone 9: Final Verification Package
 
+Status: Implemented locally on 2026-06-29 by `specs/2026-06-29-final-verification-package`; remote GitHub Actions and GHCR validation remains pending after push.
+
 Prepare the project for evaluation.
 
 Deliverables:
