@@ -242,6 +242,34 @@ La preview queda en `http://localhost:4174`. Abrirla, iniciar sesion y cargar da
 - el manifest esta disponible como `/manifest.webmanifest`;
 - hay un service worker registrado en DevTools.
 
+### CI y publicacion de imagen API
+
+El pipeline vive en `.github/workflows/ci.yml` y se ejecuta en:
+
+- `push` a `main`;
+- `pull_request` contra `main`.
+
+El job `backend-test` ejecuta:
+
+```sh
+go test ./...
+```
+
+desde `backend/`. El job `api-image` depende de esas pruebas y solo publica imagenes cuando el evento es un `push` a `main`; los pull requests no publican paquetes.
+
+La imagen publicada en GitHub Container Registry es:
+
+```text
+ghcr.io/<github-owner>/todolist-api
+```
+
+Tags esperados:
+
+- `ghcr.io/<github-owner>/todolist-api:latest`
+- `ghcr.io/<github-owner>/todolist-api:<commit-sha>`
+
+Para verificar la evidencia, abrir la pestaña Actions del repositorio, revisar una corrida exitosa de `CI` en `main`, confirmar que `Backend tests` termina antes de `Build and publish API image`, y luego revisar el paquete `todolist-api` en GitHub Container Registry.
+
 ## Documentacion del proyecto
 
 La definicion del alcance y las decisiones tecnicas viven en `specs/`:

@@ -163,6 +163,8 @@ Exit criteria:
 
 ## Milestone 8: CI and Delivery Evidence
 
+Status: Implemented locally on 2026-06-29 by `specs/2026-06-29-ci-delivery-evidence`; remote GitHub Actions and GHCR validation remains pending after push.
+
 Create the GitHub Actions pipeline required for final delivery.
 
 Deliverables:
