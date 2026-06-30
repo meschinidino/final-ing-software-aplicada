@@ -142,6 +142,8 @@ Exit criteria:
 
 ## Milestone 7: Ionic PWA and Offline Behavior
 
+Status: Completed on 2026-06-29 by `specs/2026-06-29-ionic-pwa-offline`.
+
 Implement the mobile-oriented PWA experience.
 
 Deliverables:

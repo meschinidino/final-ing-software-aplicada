@@ -56,9 +56,18 @@ func NewRouter(db *gorm.DB, authService auth.Service) *gin.Engine {
 }
 
 func corsMiddleware() gin.HandlerFunc {
+	allowedOrigins := map[string]bool{
+		"http://localhost:4174": true,
+		"http://127.0.0.1:4174": true,
+		"http://localhost:5173": true,
+		"http://127.0.0.1:5173": true,
+		"http://localhost:5174": true,
+		"http://127.0.0.1:5174": true,
+	}
+
 	return func(c *gin.Context) {
 		origin := c.GetHeader("Origin")
-		if origin == "http://localhost:5173" || origin == "http://127.0.0.1:5173" {
+		if allowedOrigins[origin] {
 			c.Header("Access-Control-Allow-Origin", origin)
 			c.Header("Vary", "Origin")
 			c.Header("Access-Control-Allow-Headers", "Authorization, Content-Type")

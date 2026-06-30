@@ -1,9 +1,18 @@
 {
-  "name": "TodoList",
+  "name": "TodoList Mobile",
   "short_name": "TodoList",
+  "description": "Mobile TodoList PWA with cached offline todo data.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#2563eb",
-  "icons": []
+  "background_color": "#f7faf8",
+  "theme_color": "#1f6f78",
+  "icons": [
+    {
+      "src": "/pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }

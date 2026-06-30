@@ -12,10 +12,14 @@
     "@ionic/react": "latest",
     "@ionic/react-router": "latest",
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "typescript": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest",
     "vite-plugin-pwa": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3"
   }
 }

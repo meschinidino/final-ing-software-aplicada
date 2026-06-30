@@ -204,6 +204,44 @@ Endpoints principales del backend:
 - `GET|POST /api/tags`
 - `GET|PUT|DELETE /api/tags/:id`
 
+### Verificar la PWA mobile/offline
+
+La app mobile vive en `mobile/` y usa la misma API que la web. Por defecto apunta a `http://localhost:8080`; se puede cambiar con `VITE_API_URL`.
+
+Levantar API y base de validacion:
+
+```sh
+make db-reset
+make migrate-up
+make api-up
+```
+
+Ejecutar la app mobile en desarrollo:
+
+```sh
+cd mobile
+npm install
+VITE_API_URL=http://localhost:8080 npm run dev
+```
+
+La app queda en `http://localhost:5174`. Desde ahi se puede registrar o iniciar sesion, recargar la pagina y confirmar que la sesion JWT persiste.
+
+Para validar PWA y service worker, usar build de produccion:
+
+```sh
+cd mobile
+npm run build
+VITE_API_URL=http://localhost:8080 npm run preview
+```
+
+La preview queda en `http://localhost:4174`. Abrirla, iniciar sesion y cargar datos de listas/tareas. Luego desactivar la red desde DevTools o detener la API con `make api-down`, recargar la pagina y confirmar que:
+
+- el shell de la app sigue cargando;
+- se muestra el ultimo snapshot local de listas/tareas;
+- aparece el indicador `Offline cache`;
+- el manifest esta disponible como `/manifest.webmanifest`;
+- hay un service worker registrado en DevTools.
+
 ## Documentacion del proyecto
 
 La definicion del alcance y las decisiones tecnicas viven en `specs/`:
