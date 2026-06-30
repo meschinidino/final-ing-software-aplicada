@@ -2,3 +2,45 @@ logging {
   level  = "info"
   format = "logfmt"
 }
+
+discovery.docker "runtime" {
+  host = "unix:///var/run/docker.sock"
+}
+
+discovery.relabel "runtime_logs" {
+  targets = discovery.docker.runtime.targets
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_compose_project"]
+    regex         = "todolist-runtime"
+    action        = "keep"
+  }
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_compose_project"]
+    target_label  = "compose_project"
+  }
+
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_compose_service"]
+    target_label  = "compose_service"
+  }
+
+  rule {
+    source_labels = ["__meta_docker_container_name"]
+    regex         = "/(.*)"
+    target_label  = "container"
+  }
+}
+
+loki.source.docker "runtime" {
+  host       = "unix:///var/run/docker.sock"
+  targets    = discovery.relabel.runtime_logs.output
+  forward_to = [loki.write.local.receiver]
+}
+
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}

@@ -122,6 +122,8 @@ Exit criteria:
 
 ## Milestone 6: Observability with Loki and Grafana
 
+Status: Completed on 2026-06-29 by `specs/2026-06-29-observability-logql-proof`.
+
 Add centralized container log ingestion.
 
 Deliverables:

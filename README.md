@@ -157,6 +157,32 @@ make runtime-down
 
 El volumen de datos principal del runtime es `todolist-runtime_todolist_runtime_db`. La base de validacion usa otro proyecto, puerto y volumen: `todolist-validation`, `localhost:54339` y `todolist-validation_todolist_validation_db`. Por eso `make db-reset` reinicia solo la base de validacion y no borra datos del runtime.
 
+### Verificar observabilidad con Loki y Grafana
+
+El runtime local incluye Loki, Grafana Alloy y Grafana para demostrar logs centralizados de contenedores. Alloy accede al socket Docker local solo para esta verificacion academica y envia los logs a Loki.
+
+Levantar el runtime:
+
+```sh
+make runtime-up
+```
+
+Generar trafico de API:
+
+```sh
+curl http://localhost:8080/health
+```
+
+Abrir Grafana en `http://localhost:3000` con usuario `admin` y password `admin`. La credencial es solo para evaluacion local. En Explore, seleccionar el datasource `Loki` y ejecutar:
+
+```logql
+{compose_project="todolist-runtime", compose_service="api"}
+```
+
+El resultado esperado es ver logs del contenedor API, incluyendo la request `GET /health` emitida por Gin.
+
+Tambien queda provisionado el dashboard `TodoList API Logs` dentro de la carpeta `TodoList`. Ese dashboard usa el mismo datasource `Loki` y muestra volumen de logs de API y lineas recientes.
+
 Para crear un usuario de prueba en el runtime antes de iniciar sesion desde la web:
 
 ```sh
