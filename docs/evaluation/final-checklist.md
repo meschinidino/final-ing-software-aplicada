@@ -1,6 +1,6 @@
 # Checklist final de evaluacion
 
-Este checklist mapea cada requisito evaluable del proyecto con los archivos implementados y la forma esperada de verificacion. Los checks remotos de GitHub Actions y GHCR quedan pendientes hasta hacer push al repositorio remoto.
+Este checklist mapea cada requisito evaluable del proyecto con los archivos implementados y la forma esperada de verificacion. La publicacion remota en GHCR fue verificada para la imagen de esta entrega.
 
 | Area evaluada | Implementacion | Verificacion | Resultado esperado | Estado |
 | --- | --- | --- | --- | --- |
@@ -15,8 +15,8 @@ Este checklist mapea cada requisito evaluable del proyecto con los archivos impl
 | Web login y CRUD | `web/src/main.tsx`, `web/src/api.ts` | Abrir `http://localhost:5173` con runtime activo | Login, creacion y borrado de datos visibles en UI | covered by E2E and manual check |
 | Ionic PWA/offline | `mobile/src/main.tsx`, `mobile/src/api.ts`, `mobile/vite.config.ts`, `mobile/public/manifest.webmanifest` | `cd mobile` y `npm run build` | Build PWA genera app instalable con service worker y manifest | validated locally |
 | Cache offline PWA | `mobile/src/api.ts`, `mobile/src/main.tsx` | Preview de produccion, cargar datos online, cortar red y recargar | App shell carga y muestra ultimo snapshot local | manual check |
-| GitHub Actions CI | `.github/workflows/ci.yml` | Revisar workflow y, luego de push, pestaña Actions | Job `Backend tests` corre en push y pull request a `main` | pending remote validation |
-| Publicacion GHCR | `.github/workflows/ci.yml` | Ver paquete `ghcr.io/<github-owner>/todolist-api` despues de push a `main` | Tags `latest` y `<commit-sha>` publicados para la API | pending remote validation |
+| GitHub Actions CI | `.github/workflows/ci.yml` | Revisar workflow y pestaña Actions | Job `Backend tests` corre en push y pull request a `main` | validated remotely |
+| Publicacion GHCR | `.github/workflows/ci.yml` | Ver paquete `ghcr.io/meschinidino/todolist-api` despues de push a `main` | Tag del commit publicado para la API | validated remotely |
 
 ## Comandos principales
 
@@ -61,5 +61,11 @@ Consulta LogQL esperada:
 Imagen GHCR esperada:
 
 ```text
-ghcr.io/<github-owner>/todolist-api
+ghcr.io/meschinidino/todolist-api
+```
+
+Imagen GHCR verificada para esta entrega:
+
+```text
+ghcr.io/meschinidino/todolist-api:97cb3bddc3fd829832c1c1caf30db52e6be8322c
 ```

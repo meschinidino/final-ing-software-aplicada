@@ -163,7 +163,7 @@ Exit criteria:
 
 ## Milestone 8: CI and Delivery Evidence
 
-Status: Implemented locally on 2026-06-29 by `specs/2026-06-29-ci-delivery-evidence`; remote GitHub Actions and GHCR validation remains pending after push.
+Status: Completed on 2026-06-29 by `specs/2026-06-29-ci-delivery-evidence`; GHCR publication verified for `ghcr.io/meschinidino/todolist-api:97cb3bddc3fd829832c1c1caf30db52e6be8322c`.
 
 Create the GitHub Actions pipeline required for final delivery.
 
@@ -174,8 +174,8 @@ Deliverables:
 - GitHub Container Registry login using the repository `GITHUB_TOKEN`.
 - Docker build/push job for the API image.
 - Tags:
-  - `ghcr.io/<github-owner>/<app>:latest`
-  - `ghcr.io/<github-owner>/<app>:<commit-sha>`
+  - `ghcr.io/meschinidino/todolist-api:latest`
+  - `ghcr.io/meschinidino/todolist-api:<commit-sha>`
 
 Exit criteria:
 
@@ -185,7 +185,7 @@ Exit criteria:
 
 ## Milestone 9: Final Verification Package
 
-Status: Implemented locally on 2026-06-29 by `specs/2026-06-29-final-verification-package`; remote GitHub Actions and GHCR validation remains pending after push.
+Status: Completed on 2026-06-29 by `specs/2026-06-29-final-verification-package`; GHCR publication verified for `ghcr.io/meschinidino/todolist-api:97cb3bddc3fd829832c1c1caf30db52e6be8322c`.
 
 Prepare the project for evaluation.
 

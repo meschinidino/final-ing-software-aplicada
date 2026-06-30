@@ -269,13 +269,19 @@ desde `backend/`. El job `api-image` depende de esas pruebas y solo publica imag
 La imagen publicada en GitHub Container Registry es:
 
 ```text
-ghcr.io/<github-owner>/todolist-api
+ghcr.io/meschinidino/todolist-api
 ```
 
-Tags esperados:
+Tags esperados por cada corrida exitosa en `main`:
 
-- `ghcr.io/<github-owner>/todolist-api:latest`
-- `ghcr.io/<github-owner>/todolist-api:<commit-sha>`
+- `ghcr.io/meschinidino/todolist-api:latest`
+- `ghcr.io/meschinidino/todolist-api:<commit-sha>`
+
+Imagen verificada para esta entrega:
+
+```text
+ghcr.io/meschinidino/todolist-api:97cb3bddc3fd829832c1c1caf30db52e6be8322c
+```
 
 Para verificar la evidencia, abrir la pestaña Actions del repositorio, revisar una corrida exitosa de `CI` en `main`, confirmar que `Backend tests` termina antes de `Build and publish API image`, y luego revisar el paquete `todolist-api` en GitHub Container Registry.
 

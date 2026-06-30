@@ -84,7 +84,7 @@ Resultado esperado: el shell de la app carga, el manifest esta disponible en `/m
 
 ## CI y GHCR
 
-Verificacion remota pendiente hasta hacer push:
+Verificacion remota confirmada despues del push a `main`:
 
 - Abrir la pestaña Actions del repositorio.
 - Confirmar que el workflow `CI` corre en `push` a `main` y `pull_request` contra `main`.
@@ -93,15 +93,21 @@ Verificacion remota pendiente hasta hacer push:
 - Confirmar el paquete en GitHub Container Registry:
 
 ```text
-ghcr.io/<github-owner>/todolist-api
+ghcr.io/meschinidino/todolist-api
 ```
 
-Tags esperados:
+Imagen verificada para esta entrega:
+
+```text
+ghcr.io/meschinidino/todolist-api:97cb3bddc3fd829832c1c1caf30db52e6be8322c
+```
+
+Tags esperados por cada corrida exitosa:
 
 - `latest`
-- `<commit-sha>` de la corrida exitosa.
+- `<commit-sha>` de la corrida exitosa, verificado para `97cb3bddc3fd829832c1c1caf30db52e6be8322c`.
 
 ## Notas de evidencia
 
 - No se deben commitear screenshots, videos, reportes de Playwright, builds `dist/`, `node_modules`, logs locales ni secretos.
-- La evidencia remota de GitHub Actions y GHCR no debe marcarse como validada hasta que exista una corrida real despues del push.
+- La evidencia remota de GitHub Actions y GHCR quedo validada para el commit `97cb3bddc3fd829832c1c1caf30db52e6be8322c`.
